@@ -33,10 +33,10 @@
 					</p>
 
 					<div class="details-fieldset">
-						<div class="details-fieldset-title">КОНТЕНТ</div>
+						<div class="details-fieldset-title">Заказ</div>
 						<form action="." method="post" class="order-form">
                             {{ form.as_p }}
-                            <p><input class="btn btn-success" type="submit" value="Place order"></p>
+                            <p><input style="font-size: 17px;" class="btn btn-success" type="submit" value="Place order"></p>
                             {% csrf_token %}
                         </form>
 					</div>
@@ -45,22 +45,4 @@
 		</section>
 
 
-    <h1>Checkout</h1>
-    <div class="order-info">
-        <h3>Your order</h3>
-        <ul>
-            {% for item in cart %}
-                <li>
-                    {{ item.quantity }}x {{ item.product.name }}
-                    <span>${{ item.total_price }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-        <p>Total: ${{ cart.get_total_price }}</p>
-    </div>
-    <form action="." method="post" class="order-form">
-        {{ form.as_p }}
-        <p><input type="submit" value="Place order"></p>
-        {% csrf_token %}
-    </form>
 {% endblock %}

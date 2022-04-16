@@ -14,16 +14,24 @@
 <!--    </div>-->
 <!--    <div class="layout_padding gallery_section">-->
 <!--    	<div class="container">-->
-<div class="row2">
+
+
+
+<div class="row2 p-5 m-5">
   <div class="column2">
-    <div class="card2">
+    <div class="card2" style="display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 0rem;justify-content: center;">
 		{% for product in products %}
+
 						<div class="card">
 						  <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="Denim Jeans" style="width:100%">
 						  <h1>{{ product.name }}</h1>
 						  <p class="price">{{ product.price }} сом</p>
 							<a href="{{ product.get_absolute_url }}"><p><button>Купить</button></p></a>
 						</div>
+
     				        {% endfor %}
 	</div>
   </div>

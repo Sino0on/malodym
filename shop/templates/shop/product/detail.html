@@ -9,37 +9,45 @@
     	    <p class="consectetur_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
     	</div>
     </div>
-    <div class="layout_padding gallery_section">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-sm-4">
-    				<div class="best_shoes">
-    					<p class="best_text"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></p>
-    					<div class="shoes_icon"><a href="{{ product.get_absolute_url }}">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-                </a></div>
-    					<div class="star_text">
-    						<div class="left_part">
-<form action="{% url 'cart_add' product.id %}" method="post">
-    {{ cart_product_form }}
-    {% csrf_token %}
-    <input type="submit" value="Add to cart">
-</form>
-    						</div>
-    						<div class="right_part">
-    							<div class="shoes_price">$ <span style="color: #ff4e5b;">{{ product.price }}</span></div>
-    						</div>
-    					</div>
 
-                    </div>
-    			</div>
 
-    		</div>
-    		<div class="buy_now_bt">
-    			<button class="buy_text">Buy Now</button>
-    		</div>
-    	</div>
-    </div>
+<section>
+			<div class="details container">
+				<div class="details-action">
+					<div class="details-action-box" style="width: 300px;">
+						<img style="width: 800px; border-radius: 20px;"
+							src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+							alt="Фото курса"
+							class="details-action-box-img"
+						/>
+						<br>
+						<br>
+						<br>
+						<h2 class="">{{ product.price }} сом</h2>
+					</div>
+
+				</div>
+				<div class="details-content">
+					<div class="details-content-title">
+						<h1>{{ product.name }}</h1>
+					</div>
+					<p class="details-content-desc">
+
+					</p>
+
+					<div class="details-fieldset">
+						<div class="details-fieldset-title">КОНТЕНТ</div>
+						<form action="{% url 'cart_add' product.id %}" method="post">
+							<div class="details-fieldset-section">
+								<h4 class="details-fieldset-section-title">{{ cart_product_form }}</h4>
+							{% csrf_token %}
+							<input class="btn btn-success " type="submit" value="Add to cart">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
 
 {% endblock %}
 

@@ -1,41 +1,51 @@
 {% extends "shop/base.html" %}
 {% load static %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/contact/contact.css' %}">
+{% endblock %}
+
+
 {% block title %}
     {% if category %}{{ category.name }}{% else %}Contact{% endif %}
 {% endblock %}
 {% block content %}
-    <div class="collection_text">Contact Us</div>
-    <div class="layout_padding contact_section">
-    	<div class="container">
-    		<h1 class="new_text"><strong>Contact Now</strong></h1>
-    	</div>
-    	<div class="container-fluid ram">
-    		<div class="row">
-    			<div class="col-md-6">
-    				<div class="email_box">
-                    <div class="input_main">
-                       <div class="container">
+    <main>
+        <section>
+            <h3>Leave a message</h3>
+                <div class="container">
                           <form  method="post">
                             {% csrf_token %}
                               {{ form.as_p }}
 							  <div class="send_btn">
-                        <button type="submit" class="main_bt">Send</button>
+                        <button type="submit" class="">Send</button>
                        </div>
-                          </form>   
-                       </div> 
+					  </form>
+                       </div>
+                
+        </section>
+    </main>
 
-                    </div>
-    		</div>
-    			</div>
-    			<div class="col-md-6">
-    				<div class="shop_banner">
-    					<div class="our_shop">
-    						<button class="out_shop_bt">Our Shop</button>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </div>
+
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+        const links = document.querySelectorAll(".nav-links li");
+        const nav = document.querySelector("nav")
+
+        hamburger.addEventListener('click', ()=>{
+            navLinks.classList.toggle("open");
+            links.forEach(link => {
+                link.classList.toggle("fade");
+            });
+            nav.style.position='fixed'
+            hamburger.classList.toggle("toggle");
+        });
+    </script>
+
+
 {% endblock %}
-

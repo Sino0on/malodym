@@ -3,50 +3,49 @@
 {% block title %}
     Your shopping cart
 {% endblock %}
+{% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/cart/cart.css' %}">
+{% endblock %}
+
 {% block content %}
-    <h1>Your shopping cart</h1>
-    <table class="cart">
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Remove</th>
-            <th>Unit price</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
- {% for item in cart %}
+    <main>
+
+      <h2>Your Cart</h2>
+
+      <div class="cart__list">
+        {% for item in cart %}
             {% with product=item.product %}
-        <tr class="total">
-            <td colspan="0" class="num"><img style="width: 80px; border-radius: 5px; padding: 5px;"
-							src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
-							alt="Фото курса"
-							class="details-action-box-img"
-						/></td>
-            <td class="num">{{ product.name }}</td>
-            <td colspan="0" class="num">{{ item.quantity }}</td>
-            <td class="num"><a class="btn btn-warning" href="{% url 'cart_remove' product.id%}">Remove</a></td>
-            <td colspan="1  ">{{ product.price }} сом</td>
-            <td class="num">*</td>
-        </tr>
-{% endwith %}
-
+                <div class="cart__list-item" data-aos="fade-up" data-aos-duration="500">
+                  <img class="item-img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="">
+                  <div class="item-description">
+                    <h4>{{ product.name }}</h4>
+                    <p>{{ product.price }} сом</p>
+                    {{ item.quantity }}
+                    <p>PRICE</p>
+                    <a class="btn btn-warning" href="{% url 'cart_remove' product.id%}">Remove</a>
+                  </div>
+                </div>
+            {% endwith %}
         {% endfor %}
-<tr class="total">
 
-            <td colspan="5"></td>
-            <td class="num">${{ cart.get_total_price }}</td>
-        </tr>
+        <div class="totalPrice">
+          <div class="priceDisplay">
+            <h4>TOTAL</h4>
+            <h4>{{ cart.get_total_price }} сом</h4>
+          </div>
+          <div class="checkout">
+            <a href="{% url 'product_list' %}"><button>CONTINUE SHOPPING</button></a>
+              <a href="{% url 'order_create' %}"><button>CHECKOUT</button></a>
+          </div>
+        </div>
+      </div>
+
+    </main>
 
 
-        </tbody>
-    </table>
-    <p class="text-right">
-        <a href="{% url 'product_list' %}" class="btn btn-success">Continue shopping</a>
-<a href="{% url 'order_create' %}" class="btn btn-warning">
-    Checkout
-</a>
-    </p>
 {% endblock %}
